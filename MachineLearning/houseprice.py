@@ -185,28 +185,3 @@ submission_data = pd.DataFrame(data={"Id": test_data.index, "SalePrice": y_rf})
 submission_data.to_csv("submission.csv", index=False)
 print(submission_data.head(20))
 
-'''
-#模型
-params = [1, 2, 3, 4, 5, 6]
-test_scores = []
-for param in params:
-   # xgboost模型
-   model = XGBRegressor(max_depth=param)
-   test_score = np.sqrt(-cross_val_score(model, X_train, y_train, cv=10, scoring="neg_mean_squared_error"))
-   test_scores.append(np.mean(test_score))
-fig, ax = plt.subplots(figsize=(10, 8))
-plt.plot(params, test_scores)
-plt.xlabel("params")
-plt.ylabel("test_scores")
-plt.show()
-
-# XGBRegressor模型
-xgboost_model = XGBRegressor(max_depth=3)
-xgboost_model.fit(X_train, y_train)
-y_pred = np.expm1(xgboost_model.predict(X_test))
-# submission_data即最后的预测结果
-submission_data = pd.DataFrame(data={"Id": test_data.index, "SalePrice": y_pred})
-#将预测结果写入submission.csv文件
-submission_data.to_csv('submission.csv', index=False)
-print(submission_data.head(20))
-'''
