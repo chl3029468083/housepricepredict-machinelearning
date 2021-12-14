@@ -31,40 +31,37 @@ plt.show()
 #取10个corr最大的变量
 cols = corrmat.nlargest(10,'SalePrice')['SalePrice'].index
 corrSP = np.corrcoef(train_data[cols].values.T)
-#np.xorrcoef计算相关系数的方法,默认以行计算
 hm = sns.heatmap(corrSP,cmap='magma',annot=True,square=True,fmt='.2f',annot_kws={'size':10},yticklabels=cols.values,xticklabels=cols.values)
 plt.show()
-
 #数据可视化
-#CentralAir
-data=pd.concat([train_data['SalePrice'],train_data['CentralAir']],axis=1)
-sns.boxplot(x='CentralAir',y='SalePrice',data=data)
+#SaleType
+data=pd.concat([train_data['SalePrice'],train_data['SaleType']],axis=1)
+sns.boxplot(x='SaleType',y='SalePrice',data=data)
 plt.show()
-#OverallQual
-data=pd.concat([train_data['SalePrice'],train_data['OverallQual']],axis=1)
-sns.boxplot(x='OverallQual',y='SalePrice',data=data)
+#GarageType
+data=pd.concat([train_data['SalePrice'],train_data['GarageType']],axis=1)
+sns.boxplot(x='GarageType',y='SalePrice',data=data)
 plt.show()
 #YearBuilt
 data=pd.concat([train_data['SalePrice'],train_data['YearBuilt']],axis=1)
 plt.scatter(x='YearBuilt',y='SalePrice',data=data)
-plt.xlabel('YearBuilt')
-plt.ylabel('SalePrice')
 plt.show()
 #LotArea
 data=pd.concat([train_data['SalePrice'],train_data['LotArea']],axis=1)
 plt.scatter(x='LotArea',y='SalePrice',data=data)
-plt.xlabel('LotArea')
-plt.ylabel('SalePrice')
 plt.show()
-#TotalBsmtSF
-data=pd.concat([train_data['SalePrice'],train_data['TotalBsmtSF']],axis=1)
-sns.scatterplot(x='TotalBsmtSF',y='SalePrice',data=data)
-plt.xlabel('TotalBsmtSF')
-plt.ylabel('SalePrice')
+#MasVnrArea
+data=pd.concat([train_data['SalePrice'],train_data['MasVnrArea']],axis=1)
+sns.scatterplot(x='MasVnrArea',y='SalePrice',data=data)
 plt.show()
 #YearRemodAdd
 data=pd.concat([train_data['SalePrice'],train_data['YearRemodAdd']],axis=1)
 sns.barplot(x='YearRemodAdd',y='SalePrice',data=data)
+plt.xticks([])
+plt.show()
+#LotFrontage
+data=pd.concat([train_data['SalePrice'],train_data['LotFrontage']],axis=1)
+sns.boxplot(x='LotFrontage',y='SalePrice',data=data)
 plt.xticks([])
 plt.show()
 #异常值
@@ -184,4 +181,3 @@ y_rf = np.expm1(rf.predict(X_test))
 submission_data = pd.DataFrame(data={"Id": test_data.index, "SalePrice": y_rf})
 submission_data.to_csv("submission.csv", index=False)
 print(submission_data.head(20))
-
